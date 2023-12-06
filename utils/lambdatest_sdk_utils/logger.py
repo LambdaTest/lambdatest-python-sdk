@@ -1,11 +1,6 @@
 import os
 import logging
-
-def get_smart_ui_server_address():
-    return os.getenv('SMARTUI_SERVER_ADDRESS', 'http://localhost:8080')
-
-def get_pkg_name():
-    return "@lambdatest/python-selenium-sdk"
+from lambdatest_sdk_utils.constants import get_pkg_name
 
 def log_level():
     if os.getenv('LT_SDK_DEBUG') == 'true':

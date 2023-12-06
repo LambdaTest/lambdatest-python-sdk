@@ -1,0 +1,2 @@
+from lambdatest_python_selenium.version import __version__
+from lambdatest_python_selenium.smartui import smartui_snapshot

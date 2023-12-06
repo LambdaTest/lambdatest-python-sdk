@@ -1,5 +1,5 @@
-from python_selenium.rest import is_smartui_enabled,fetch_dom_serializer,post_snapshot
-from python_selenium.utils import get_pkg_name,setup_logger,get_logger
+from lambdatest_sdk_utils import is_smartui_enabled,fetch_dom_serializer,post_snapshot
+from lambdatest_sdk_utils import get_pkg_name,setup_logger,get_logger
 
 
 def smartui_snapshot(driver, name,**kwargs):

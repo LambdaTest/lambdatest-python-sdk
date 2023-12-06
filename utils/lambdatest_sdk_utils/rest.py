@@ -1,7 +1,6 @@
 import requests
-import os
-import json
-from python_selenium.utils import get_smart_ui_server_address,get_logger
+from lambdatest_sdk_utils.constants import get_smart_ui_server_address
+from lambdatest_sdk_utils.logger import get_logger
 
 logger = get_logger()
 

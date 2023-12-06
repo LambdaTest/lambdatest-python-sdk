@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
-import python_selenium
+import lambdatest_selenium_driver
 
 setup(
-    name="@lambdatest/python-selenium-sdk",
-    version=python_selenium.__version__,
+    name="lambdatest-selenium-driver",
+    version=lambdatest_selenium_driver.__version__,
     author="LambdaTest <keys@lambdatest.com>",
     description="Python Selenium SDK for testing with Smart UI",
     long_description=open('README.md').read(),
@@ -13,8 +13,8 @@ setup(
     packages=find_packages(),
     license="MIT",
     install_requires=[
-        "requests",
-        "selenium"
+        "selenium",
+        "lambdatest-sdk-utils"
     ],
     python_requires='>=3.6',
     classifiers=[
