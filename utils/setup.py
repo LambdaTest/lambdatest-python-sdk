@@ -3,7 +3,7 @@ import lambdatest_sdk_utils
 
 setup(
     name="lambdatest-sdk-utils",
-    version=lambdatest_sdk_utils.__version__,
+    version="1.0.0",
     author="LambdaTest <keys@lambdatest.com>",
     description="SDK utils",
     long_description="SDK utils for lambdatest",
@@ -13,7 +13,7 @@ setup(
     packages=find_packages(),
     license="MIT",
     install_requires=[
-        "requests",
+        "requests==2.*",
     ],
     python_requires='>=3.6',
     classifiers=[
