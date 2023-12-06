@@ -22,6 +22,6 @@ def smartui_snapshot(driver, name,**kwargs):
         # Post the dom to smartui endpoint
         post_snapshot(dom,name,get_pkg_name())
 
-        logger.info(f'snapshot captureed {name}')
+        logger.info(f'Snapshot captured {name}')
     except Exception as e:
         logger.error(f'Could not take snapshot "{name}" Error {e}')
