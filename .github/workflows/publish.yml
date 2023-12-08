@@ -30,8 +30,8 @@ jobs:
     - name: Build and publish lambdatest-utils
       if: github.event.inputs.package-name == 'lambdatest-utils'
       env:
-        PYPI_USERNAME: __token__
-        PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
         cd utils
         python setup.py sdist bdist_wheel
@@ -39,8 +39,8 @@ jobs:
     - name: Build and publish lambdatest-selenium-driver
       if: github.event.inputs.package-name == 'lambdatest-selenium-driver'
       env:
-        PYPI_USERNAME: __token__
-        PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
         cd selenium
         python setup.py sdist bdist_wheel
