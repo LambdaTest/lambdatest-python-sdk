@@ -2,7 +2,7 @@ from lambdatest_sdk_utils import is_smartui_enabled,fetch_dom_serializer,post_sn
 from lambdatest_sdk_utils import get_pkg_name,setup_logger,get_logger
 
 
-def smartui_snapshot(driver, name,**kwargs):
+def smartui_snapshot(driver=None, name=None,**kwargs):
     # setting up logger
     setup_logger()
     logger = get_logger()
@@ -10,6 +10,8 @@ def smartui_snapshot(driver, name,**kwargs):
     try:
         if not name:
             raise Exception('The `snapshotName` argument is required.')
+        if not driver:
+            raise Exception('An instance of the selenium driver object is required.')
         if is_smartui_enabled() is False: 
             raise Exception("SmartUI server is not running.")
         
