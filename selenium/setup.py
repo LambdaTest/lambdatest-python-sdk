@@ -17,7 +17,7 @@ setup(
     ],
     python_requires='>=3.6',
     classifiers=[
-        "Development Status :: 5 - Production/Stable"
+        "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python :: 3",
         "Natural Language :: English",
         "License :: OSI Approved :: MIT License",
