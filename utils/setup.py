@@ -8,7 +8,7 @@ setup(
     description="SDK utils",
     long_description="SDK utils for lambdatest",
     long_description_content_type="text/markdown",
-    url="git+https://github.com/LambdaTest/lambdatest-python-sdk",
+    url="https://github.com/LambdaTest/lambdatest-python-sdk",
     keywords="lambdatest python selenium sdk",
     packages=find_packages(),
     license="MIT",
