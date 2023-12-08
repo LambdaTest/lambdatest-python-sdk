@@ -10,7 +10,7 @@ setup(
     version="1.0.0",
     author="LambdaTest <keys@lambdatest.com>",
     description="Python Selenium SDK for testing with Smart UI",
-    long_description=open('README.md').read(),
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/LambdaTest/lambdatest-python-sdk",
     keywords="lambdatest python selenium sdk",
