@@ -4,7 +4,7 @@
 SmartUI SDK for python selenium
 - [Installation](#installation)
 - [Methods](#methods)
-- [Methods](#methods)
+- [Usage](#usage)
 
 ## Installation
 
