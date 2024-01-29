@@ -30,12 +30,14 @@ def fetch_dom_serializer():
         raise Exception(f'fetch DOMSerializer failed')
 
 
-def post_snapshot(dom,snaphshotname,pkg):
+def post_snapshot(snapshot,pkg,**kwargs):
     try:
         response = requests.post(f'{SMART_UI_API}/snapshot', json={
             'snapshot': {
-                'dom' : dom['dom']['html'],
-                'name' : snaphshotname
+                'dom' : snapshot['dom'],
+                'name' : snapshot['name'],
+                'url' : snapshot['url'],
+                **kwargs
             },
             'testType': pkg
         })    
