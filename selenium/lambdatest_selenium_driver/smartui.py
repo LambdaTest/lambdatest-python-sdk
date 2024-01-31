@@ -12,7 +12,7 @@ def smartui_snapshot(driver, name,options={}):
         if not name:
             raise Exception('The `snapshotName` argument is required.')
         if is_smartui_enabled() is False: 
-            raise Exception("SmartUI server is not running.")
+            raise Exception("Cannot find SmartUI server.")
         
         resp = fetch_dom_serializer()
         driver.execute_script(resp['data']['dom'])
