@@ -18,7 +18,7 @@ setup(
     license="MIT",
     install_requires=[
         "selenium>=3",
-        "lambdatest-sdk-utils==1.*"
+        "lambdatest-sdk-utils"
     ],
     python_requires='>=3.6',
     classifiers=[
