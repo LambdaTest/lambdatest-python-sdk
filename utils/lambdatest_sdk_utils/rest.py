@@ -4,11 +4,9 @@ from lambdatest_sdk_utils.logger import get_logger
 
 logger = get_logger()
 
-SMART_UI_API = get_smart_ui_server_address()
-
 def is_smartui_enabled():
     try:
-        response = requests.get(f'{SMART_UI_API}/healthcheck')
+        response = requests.get(f'{get_smart_ui_server_address()}/healthcheck')
         response.raise_for_status()
         return True
     except Exception as e:
@@ -17,7 +15,7 @@ def is_smartui_enabled():
 
 def fetch_dom_serializer():
     try:
-        response = requests.get(f'{SMART_UI_API}/domserializer')
+        response = requests.get(f'{get_smart_ui_server_address()}/domserializer')
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
@@ -30,12 +28,14 @@ def fetch_dom_serializer():
         raise Exception(f'fetch DOMSerializer failed')
 
 
-def post_snapshot(dom,snaphshotname,pkg):
+def post_snapshot(snapshot,pkg,**kwargs):
     try:
-        response = requests.post(f'{SMART_UI_API}/snapshot', json={
+        response = requests.post(f'{get_smart_ui_server_address()}/snapshot', json={
             'snapshot': {
-                'dom' : dom['dom']['html'],
-                'name' : snaphshotname
+                'dom' : snapshot['dom'],
+                'name' : snapshot['name'],
+                'url' : snapshot['url'],
+                **kwargs
             },
             'testType': pkg
         })    
