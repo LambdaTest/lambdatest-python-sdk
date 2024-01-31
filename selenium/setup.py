@@ -7,7 +7,7 @@ with open(path.join(cwd, 'readme.md'), encoding='utf-8') as f:
 
 setup(
     name="lambdatest-selenium-driver",
-    version="1.0.3",
+    version="1.0.2",
     author="LambdaTest <keys@lambdatest.com>",
     description="Python Selenium SDK for testing with Smart UI",
     long_description=long_description,
