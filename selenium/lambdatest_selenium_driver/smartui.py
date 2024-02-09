@@ -37,4 +37,5 @@ def smartui_snapshot(driver, name,options={}):
 
         logger.info(f'Snapshot captured {name}')
     except Exception as e:
-        logger.error(f'Could not take snapshot "{name}" Error {e}')
+        logger.error(f'SmartUI snapshot failed  "${name}"')
+        logger.error(e)
