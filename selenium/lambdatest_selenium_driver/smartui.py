@@ -14,7 +14,6 @@ def smartui_snapshot(driver, name,options={}):
         raise Exception("Cannot find SmartUI server.")
     
     try:
-        
         resp = fetch_dom_serializer()
         driver.execute_script(resp['data']['dom'])
 
