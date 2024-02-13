@@ -7,13 +7,13 @@ def smartui_snapshot(driver, name,options={}):
     # setting up logger
     setup_logger()
     logger = get_logger()
+
+    if not name:
+        raise Exception('The `snapshotName` argument is required.')
+    if is_smartui_enabled() is False: 
+        raise Exception("Cannot find SmartUI server.")
     
     try:
-        if not name:
-            raise Exception('The `snapshotName` argument is required.')
-        if is_smartui_enabled() is False: 
-            raise Exception("Cannot find SmartUI server.")
-        
         resp = fetch_dom_serializer()
         driver.execute_script(resp['data']['dom'])
 
@@ -37,4 +37,5 @@ def smartui_snapshot(driver, name,options={}):
 
         logger.info(f'Snapshot captured {name}')
     except Exception as e:
-        logger.error(f'Could not take snapshot "{name}" Error {e}')
+        logger.error(f'SmartUI snapshot failed  "${name}"')
+        logger.error(e)
