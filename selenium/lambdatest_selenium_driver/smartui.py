@@ -6,7 +6,7 @@ from lambdatest_sdk_utils import get_pkg_name,setup_logger,get_logger
 def smartui_snapshot(driver, name,options={}):
     # setting up logger
     setup_logger()
-    logger = get_logger()
+    logger = get_logger('lambdatest-selenium-driver')
 
     if not name:
         raise Exception('The `snapshotName` argument is required.')

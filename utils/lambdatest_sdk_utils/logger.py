@@ -1,6 +1,5 @@
 import os
 import logging
-from lambdatest_sdk_utils.constants import get_pkg_name
 
 def log_level():
     if os.getenv('LT_SDK_DEBUG') == 'true':
@@ -22,6 +21,6 @@ def log_level():
 def setup_logger():
     logging.basicConfig(level=log_level())
 
-def get_logger():
-    logger = logging.getLogger(get_pkg_name())
+def get_logger(package_name):
+    logger = logging.getLogger(package_name)
     return logger

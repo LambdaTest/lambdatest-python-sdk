@@ -2,7 +2,7 @@ import requests
 from lambdatest_sdk_utils.constants import get_smart_ui_server_address
 from lambdatest_sdk_utils.logger import get_logger
 
-logger = get_logger()
+logger = get_logger('lambdatest_sdk_utils')
 
 def is_smartui_enabled():
     try:
