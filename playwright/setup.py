@@ -19,7 +19,6 @@ setup(
     install_requires=[
         "playwright>=1.12",
         "lambdatest-sdk-utils",
-        "asyncio"   ## need to check this part 
     ],
     python_requires='>=3.7',  # Playwright requires Python 3.7 or newer
     classifiers=[
@@ -28,6 +27,5 @@ setup(
         "Natural Language :: English",
         "License :: OSI Approved :: MIT License",
         "Topic :: Software Development :: Testing",
-        "Framework :: AsyncIO",  ## also needd to check 
     ],
 )

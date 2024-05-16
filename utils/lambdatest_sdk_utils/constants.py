@@ -6,4 +6,4 @@ def get_smart_ui_server_address():
     return os.getenv('SMARTUI_SERVER_ADDRESS')
 
 def get_pkg_name():
-    return "@lambdatest/python-selenium-driver"
+    return "lambdatest_sdk_utils"
