@@ -6,7 +6,7 @@ from playwright.async_api import Page # type: ignore
 def smartui_snapshot(page: Page, name: str, options={}):
     # setting up logger
     setup_logger()
-    logger = get_logger()
+    logger = get_logger('lambdatest-playwright-driver')
     
 
     if not page:
@@ -19,9 +19,7 @@ def smartui_snapshot(page: Page, name: str, options={}):
     try:
         resp = fetch_dom_serializer()
         page.evaluate(resp['data']['dom'])
-        
-        logger.info('starting smartui snapshot function')
-        
+                
         dom = dict()
         dom['name'] = name
         dom['url'] = page.url        
