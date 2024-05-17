@@ -1,6 +1,6 @@
 import json
 from lambdatest_sdk_utils import is_smartui_enabled,fetch_dom_serializer,post_snapshot
-from lambdatest_sdk_utils import get_pkg_name,setup_logger,get_logger
+from lambdatest_sdk_utils import setup_logger,get_logger
 
 
 def smartui_snapshot(driver, name,options={}):
@@ -29,7 +29,7 @@ def smartui_snapshot(driver, name,options={}):
 
         # Post the dom to smartui endpoint
         dom['name'] = name
-        res = post_snapshot(dom,get_pkg_name(),options=options)
+        res = post_snapshot(dom,'lambdatest-selenium-driver',options=options)
 
         if res and res.get('data') and res['data'].get('warnings') and len(res['data']['warnings']) != 0:
             for warning in res['data']['warnings']:
