@@ -10,6 +10,7 @@ on:
         options:
           - lambdatest-utils
           - lambdatest-selenium-driver
+          - lambdatest-playwright-driver
         default: 'lambdatest-utils'
 
 jobs:
@@ -43,5 +44,14 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
         cd selenium
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
+    - name: Build and publish lambdatest-playwright-driver
+      if: github.event.inputs.package-name == 'lambdatest-playwright-driver'
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        cd playwright
         python setup.py sdist bdist_wheel
         twine upload dist/*
