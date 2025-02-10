@@ -17,6 +17,11 @@ def smartui_snapshot(driver, name,options={}):
         resp = fetch_dom_serializer()
         driver.execute_script(resp['data']['dom'])
 
+        # Get the sessionId from the driver
+        session_id = driver.session_id
+        if session_id:
+            options['sessionId'] = session_id  # Append sessionId to options
+
         # Serialize and capture the DOM
         dom = driver.execute_script(
             f"""
