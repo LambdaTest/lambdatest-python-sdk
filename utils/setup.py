@@ -3,7 +3,7 @@ import lambdatest_sdk_utils
 
 setup(
     name="lambdatest-sdk-utils",
-    version="1.0.2",
+    version="1.0.3",
     author="LambdaTest <keys@lambdatest.com>",
     description="SDK utils",
     long_description="SDK utils for lambdatest",
