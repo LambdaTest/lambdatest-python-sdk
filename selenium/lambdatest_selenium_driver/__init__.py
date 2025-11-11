@@ -1,3 +1,2 @@
 from lambdatest_selenium_driver.version import __version__
 from lambdatest_selenium_driver.smartui import smartui_snapshot
-from lambdatest_selenium_driver.smartui_app_snapshot import SmartUIAppSnapshot
