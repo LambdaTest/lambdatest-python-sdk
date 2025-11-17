@@ -10,7 +10,7 @@ logger = get_logger('lambdatest_sdk_utils')
 # API URLs
 SMARTUI_CLIENT_API_URL = os.getenv("SMARTUI_CLIENT_API_URL", "https://api.lambdatest.com/visualui/1.0")
 SMARTUI_UPLOAD_URL = os.getenv("SMARTUI_UPLOAD_URL", "https://api.lambdatest.com/")
-TEST_TYPE = "lambdatest-python-app-sdk"
+TEST_TYPE = "lambdatest-java-app-sdk"
 
 # Routes
 SMARTUI_AUTH_ROUTE = "/token/verify"
@@ -124,7 +124,7 @@ def upload_screenshot(screenshot_path: str, upload_request: UploadSnapshotReques
         Exception: If upload fails
     """
     try:
-        url = get_upload_host_url() + SMARTUI_UPLOAD_SCREENSHOT_ROUTE
+        url = get_host_url() + SMARTUI_UPLOAD_SCREENSHOT_ROUTE
         
         # Prepare multipart form data
         with open(screenshot_path, 'rb') as f:

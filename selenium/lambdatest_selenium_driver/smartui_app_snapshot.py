@@ -233,9 +233,17 @@ class SmartUIAppSnapshot:
     
     def _process_upload_options(self, upload_request: UploadSnapshotRequest, options: Dict[str, str]):
         """Process upload-related options."""
+        self._set_upload_chunk_options(upload_request, options)
         self._set_navigation_options(upload_request, options)
         upload_request.crop_footer = "false"
         upload_request.crop_status_bar = "false"
+
+    def _set_upload_chunk_options(self, upload_request: UploadSnapshotRequest, options: Dict[str, str]):
+        """Set upload chunk related options."""
+        #get boolean value for upload chunk from options
+        upload_chunk = self._parse_boolean_option(options, "uploadChunk", False)
+        if upload_chunk:
+            upload_request.upload_chunk = "true"
     
     def _set_navigation_options(self, upload_request: UploadSnapshotRequest, options: Dict[str, str]):
         """Set navigation bar and status bar height options."""
@@ -255,11 +263,12 @@ class SmartUIAppSnapshot:
         temp_dir = tempfile.mkdtemp(prefix=f"smartui_{screenshot_name}_")
         
         try:
+            full_page_util = FullPageScreenshotUtil(
+                    driver, temp_dir, config.test_type, config.precise_scroll
+            )
+            upload_request.device_name = full_page_util.device_name
             if config.full_page:
                 # Full-page screenshot
-                full_page_util = FullPageScreenshotUtil(
-                    driver, temp_dir, config.test_type, config.precise_scroll
-                )
                 result = full_page_util.capture_full_page_screenshot(page_count)
                 screenshots = result["screenshots"]
                 self._validate_screenshots(screenshots)
@@ -297,7 +306,6 @@ class SmartUIAppSnapshot:
     def _upload_multiple_screenshots(self, screenshots: List[str], upload_request: UploadSnapshotRequest):
         """Upload multiple screenshots as chunks."""
         total_screenshots = len(screenshots)
-        upload_request.upload_chunk = "true"
         
         # Upload all but last screenshot
         for i in range(total_screenshots - 1):

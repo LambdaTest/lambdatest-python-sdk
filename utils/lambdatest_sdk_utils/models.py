@@ -61,6 +61,7 @@ class UploadSnapshotRequest:
     status_bar_height: Optional[str] = None
     crop_footer: Optional[str] = "false"
     crop_status_bar: Optional[str] = "false"
+    project_type: Optional[str] = None
 
     def to_dict(self):
         """Convert to dictionary for multipart form data."""
@@ -97,6 +98,8 @@ class UploadSnapshotRequest:
             data["cropFooter"] = self.crop_footer
         if self.crop_status_bar:
             data["cropStatusBar"] = self.crop_status_bar
+        if self.project_type:
+            data["projectType"] = self.project_type
         
         return data
 
