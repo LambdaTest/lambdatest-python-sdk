@@ -9,6 +9,7 @@ class BuildData:
     build_url: Optional[str] = None
     baseline: Optional[bool] = None
     name: Optional[str] = None
+    project_token: Optional[str] = None
 
     def to_dict(self):
         return {
@@ -24,7 +25,8 @@ class BuildData:
             build_id=data.get("buildId"),
             build_url=data.get("buildURL"),
             baseline=data.get("baseline"),
-            name=data.get("buildName")
+            name=data.get("buildName"),
+            project_token=data.get("projectToken")
         )
 
 

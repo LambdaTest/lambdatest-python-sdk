@@ -8,6 +8,7 @@ from lambdatest_sdk_utils.logger import setup_logger, get_logger
 from lambdatest_sdk_utils.git_utils import get_git_info
 from lambdatest_sdk_utils.models import BuildData, UploadSnapshotRequest
 from lambdatest_sdk_utils.app_api import create_build, upload_screenshot, stop_build
+from lambdatest_sdk_utils.rest import fetch_build_info
 from lambdatest_selenium_driver.full_page_screenshot_util import FullPageScreenshotUtil
 
 # Setup logger
@@ -24,6 +25,7 @@ OPTION_PRECISE_SCROLL = "preciseScroll"
 OPTION_PAGE_COUNT = "pageCount"
 OPTION_NAVIGATION_BAR_HEIGHT = "navigationBarHeight"
 OPTION_STATUS_BAR_HEIGHT = "statusBarHeight"
+OPTION_IS_CLI_ENABLED = "isCliEnabled"
 
 BROWSER_IOS = "safari"
 BROWSER_ANDROID = "chrome"
@@ -38,13 +40,14 @@ class SnapshotConfig:
     """Configuration object for snapshot capture."""
     
     def __init__(self, device_name: str, platform: str, test_type: str, 
-                 page_count: int, full_page: bool, precise_scroll: bool):
+                 page_count: int, full_page: bool, precise_scroll: bool, is_cli_enabled: bool):
         self.device_name = device_name
         self.platform = platform
         self.test_type = test_type
         self.page_count = page_count
         self.full_page = full_page
         self.precise_scroll = precise_scroll
+        self.is_cli_enabled = is_cli_enabled
 
 
 class SmartUIAppSnapshot:
@@ -139,7 +142,7 @@ class SmartUIAppSnapshot:
         try:
             config = self._parse_snapshot_config(options)
             self._validate_mandatory_params(driver, screenshot_name, config.device_name)
-            
+
             upload_request = self._create_upload_request(driver, screenshot_name, config)
             self._process_screenshot_capture(driver, screenshot_name, config, upload_request, options)
         except Exception as e:
@@ -158,7 +161,8 @@ class SmartUIAppSnapshot:
             test_type=test_type,
             page_count=self._parse_int_option(options, OPTION_PAGE_COUNT, 0),
             full_page=self._parse_boolean_option(options, OPTION_FULL_PAGE, False),
-            precise_scroll=self._parse_boolean_option(options, OPTION_PRECISE_SCROLL, False)
+            precise_scroll=self._parse_boolean_option(options, OPTION_PRECISE_SCROLL, False),
+            is_cli_enabled=self._parse_boolean_option(options, OPTION_IS_CLI_ENABLED, False)
         )
     
     def _validate_mandatory_params(self, driver: WebDriver, screenshot_name: str, device_name: str):
@@ -177,23 +181,24 @@ class SmartUIAppSnapshot:
         rect = driver.get_window_rect()
         viewport_string = f"{rect['width']}x{rect['height']}"
         
-        request = self._initialize_upload_request(screenshot_name, viewport_string)
+        request = self._initialize_upload_request(screenshot_name, viewport_string, config)
         self._configure_device_and_platform(request, config.device_name, config.platform)
         request.screenshot_hash = str(uuid.uuid4())
         
         return request
     
-    def _initialize_upload_request(self, screenshot_name: str, viewport: str) -> UploadSnapshotRequest:
+    def _initialize_upload_request(self, screenshot_name: str, viewport: str, config: SnapshotConfig) -> UploadSnapshotRequest:
         """Initialize upload request with base values."""
         request = UploadSnapshotRequest()
+        if config.is_cli_enabled:
+            build_info = fetch_build_info()
+            if build_info and "data" in build_info:
+                self.build_data = BuildData.from_dict(build_info["data"])
+                self.project_token = self.build_data.project_token
+                
         request.screenshot_name = screenshot_name
         request.project_token = self.project_token
         request.viewport = viewport
-        logger.info(f"Viewport set to: {viewport}")
-        
-        if self.build_data:
-            request.build_id = self.build_data.build_id
-            request.build_name = self.build_data.name
         
         return request
     
