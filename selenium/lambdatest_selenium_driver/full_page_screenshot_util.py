@@ -50,9 +50,6 @@ class FullPageScreenshotUtil:
         self.prev_page_source = ""
         self.default_page_count = DEFAULT_PAGE_COUNT
         
-        logger.info(f"FullPageScreenshotUtil initialized for testType: {self.test_type}, "
-                   f"platform: {self.platform}, deviceName: {self.device_name}")
-        
         self._create_directory_if_needed()
     
     def _create_directory_if_needed(self):
@@ -377,6 +374,10 @@ class FullPageScreenshotUtil:
                 caps = self.driver.capabilities
                 device_keys = ["deviceName", "device", "deviceModel", "deviceType"]
                 
+                for key in device_keys:
+                    desired = caps.get("desired", {})
+                    if key in desired and desired[key]:
+                        return str(desired[key])
                 for key in device_keys:
                     if key in caps and caps[key]:
                         return str(caps[key])

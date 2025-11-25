@@ -171,8 +171,6 @@ class SmartUIAppSnapshot:
             raise ValueError("An instance of the selenium driver object is required.")
         if not screenshot_name or screenshot_name.strip() == "":
             raise ValueError("The `snapshotName` argument is required.")
-        if not device_name or device_name.strip() == "":
-            raise ValueError("Device name is a mandatory parameter.")
     
     def _create_upload_request(self, driver: WebDriver, screenshot_name: str, 
                                config: SnapshotConfig) -> UploadSnapshotRequest:
@@ -182,7 +180,6 @@ class SmartUIAppSnapshot:
         viewport_string = f"{rect['width']}x{rect['height']}"
         
         request = self._initialize_upload_request(screenshot_name, viewport_string, config)
-        self._configure_device_and_platform(request, config.device_name, config.platform)
         request.screenshot_hash = str(uuid.uuid4())
         
         return request
@@ -203,10 +200,10 @@ class SmartUIAppSnapshot:
         return request
     
     def _configure_device_and_platform(self, request: UploadSnapshotRequest, 
-                                      device_name: str, platform: str):
+                                      device_name: str):
         """Configure device and platform information."""
         browser_name = self._determine_default_browser(device_name)
-        platform_name = self._determine_platform_name(platform, browser_name)
+        platform_name = self._determine_platform_name(browser_name)
         
         request.os = platform_name
         request.device_name = f"{device_name} {platform_name}"
@@ -216,9 +213,9 @@ class SmartUIAppSnapshot:
         """Determine default browser based on device name."""
         return PLATFORM_IOS if device_name.lower().startswith("i") else PLATFORM_ANDROID
     
-    def _determine_platform_name(self, platform: str, default_browser: str) -> str:
+    def _determine_platform_name(self, default_browser: str) -> str:
         """Determine platform name."""
-        return platform if platform and platform.strip() else default_browser
+        return default_browser
     
     def _determine_actual_browser(self, platform_name: str) -> str:
         """Determine actual browser name."""
@@ -272,6 +269,7 @@ class SmartUIAppSnapshot:
                     driver, temp_dir, config.test_type, config.precise_scroll
             )
             upload_request.device_name = full_page_util.device_name
+            self._configure_device_and_platform(upload_request, full_page_util.device_name)
             if config.full_page:
                 # Full-page screenshot
                 result = full_page_util.capture_full_page_screenshot(page_count)
