@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="lambdatest-sdk-utils",
-    version="1.0.4",
+    version="1.0.5",
     author="LambdaTest <keys@lambdatest.com>",
     description="SDK utils",
     long_description="SDK utils for lambdatest",
