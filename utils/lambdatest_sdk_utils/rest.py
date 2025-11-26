@@ -58,4 +58,13 @@ def get_snapshot_status(snapshot_name,context_id,timeout):
     except Exception as e:
         logger.debug(f'get snapshot status failed : {e}')
         raise Exception(f'get snapshot status failed')
+    
+def fetch_build_info():
+    try:
+        response = requests.get(f'{get_smart_ui_server_address()}/build/info')
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        logger.debug(f'fetch build info failed : {e}')
+        raise Exception(f'fetch build info failed')
         
