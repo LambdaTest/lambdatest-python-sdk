@@ -1,3 +1,3 @@
 selenium>=3
-lambdatest-sdk-utils==1.*
+lambdatest-sdk-utils==1.0.5
 
