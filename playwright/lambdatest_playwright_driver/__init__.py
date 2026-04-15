@@ -1,2 +1,2 @@
 from lambdatest_playwright_driver.version import __version__
-from lambdatest_playwright_driver.smartui import smartui_snapshot
+from lambdatest_playwright_driver.smartui import smartui_snapshot, smartui_snapshot_async
