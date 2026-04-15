@@ -7,7 +7,7 @@ with open(path.join(cwd, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="lambdatest-playwright-driver",
-    version="1.1.0b1",
+    version="1.1.0",
     author="LambdaTest <keys@lambdatest.com>",
     description="Python Playwright SDK for visual testing with Smart UI",
     long_description=long_description,
