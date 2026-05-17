@@ -19,8 +19,8 @@ With TestMu AI (Formerly LambdaTest), you can run Python-based tests across real
 
 1. Python 3.7 or higher installed.
 2. pip package manager.
-3. A TestMu AI account — [sign up here](https://www.testmuai.com/register/).
-4. Your TestMu AI Username and Access Key from the [Automation Dashboard](https://automation.testmuai.com/).
+3. A TestMu AI account — sign up here.
+4. Your TestMu AI Username and Access Key from the Automation Dashboard.
 
 ### Setup
 
