@@ -1,8 +1,8 @@
-﻿# Run Python Tests on TestMu AI (Formerly LambdaTest)
+# Python SDK for TestMu AI (Formerly LambdaTest)
 
 <p align="center">
   <a href="https://www.testmuai.com/"><img src="https://img.shields.io/badge/MADE%20BY%20TestMu%20AI-000000.svg?style=for-the-badge&labelColor=000" alt="Made by TestMu AI"></a>
-  <a href="https://pypi.org/project/lambdatest-sdk/"><img src="https://img.shields.io/pypi/v/lambdatest-sdk?style=for-the-badge&logo=pypi&labelColor=000" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/lambdatest-sdk/"><img src="https://img.shields.io/pypi/v/lambdatest-sdk.svg?style=for-the-badge&labelColor=000000" alt="PyPI version"></a>
   <a href="https://community.testmuai.com/"><img src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&labelColor=000000" alt="Community"></a>
 </p>
 
@@ -10,9 +10,9 @@
 
 [TestMu AI](https://www.testmuai.com/) (Formerly LambdaTest) is the world's first full-stack AI Agentic Quality Engineering platform that empowers teams to test intelligently, smarter, and ship faster. Built for scale, it offers a full-stack testing cloud with 10K+ real devices and 3,000+ browsers. With AI-native test management, MCP servers, and agent-based automation, TestMu AI supports Selenium, Appium, Playwright, and all major frameworks. 
 
-With TestMu AI (Formerly LambdaTest), you can run Python-based tests across real browsers and operating systems. This sample shows how to configure the TestMu AI (Formerly LambdaTest) Python SDK to run on the TestMu AI cloud.
+With TestMu AI (Formerly LambdaTest), you can integrate the Python SDK to run tests across real browsers and operating systems at scale.
 
-- [Sign up on TestMu AI](https://www.testmuai.com/register/) (Formerly LambdaTest).
+- [Sign up on TestMu AI (Formerly LambdaTest)](https://www.testmuai.com/register/).
 - Follow the [TestMu AI Documentation](https://www.testmuai.com/support/docs/) for the full setup walkthrough.
 
 ### Prerequisites
@@ -84,7 +84,7 @@ capabilities = {
 
 ## Contributions
 
-Contributions are welcome. Open an issue to discuss your idea before submitting a pull request. When reporting bugs, include your Node.js version, OS, and Angular CLI version.
+Contributions are welcome. Open an issue to discuss your idea before submitting a pull request. When reporting bugs, include your Python version, OS, and pip version.
 
 ## TestMu AI (Formerly LambdaTest) Community
 
