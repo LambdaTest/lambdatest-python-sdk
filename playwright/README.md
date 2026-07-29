@@ -11,7 +11,7 @@ SmartUI SDK for python playwright
 Install Smart UI cli
 
 ```sh-session
-$ npm install -g @lambdatest/smartui-cli 
+$ npm install -g @lambdatest/smartui-cli@latest 
 ```
 
 Install Python Playwright Package
