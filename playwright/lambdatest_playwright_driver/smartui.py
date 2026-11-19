@@ -1,6 +1,16 @@
 from lambdatest_sdk_utils import is_smartui_enabled, fetch_dom_serializer, post_snapshot # type: ignore
 from lambdatest_sdk_utils import setup_logger, get_logger # type: ignore
 from playwright.async_api import Page # type: ignore
+import json
+
+# on LambdaTest the hub answers this action with the test details; elsewhere it evaluates to None
+GET_TEST_DETAILS = 'lambdatest_action: ' + json.dumps({'action': 'getTestDetails'})
+
+def _session_id(details):
+    try:
+        return (json.loads(details).get('data') or {}).get('session_id', '') if details else ''
+    except Exception:
+        return ''
 
 def smartui_snapshot(page: Page, name: str, options={}):
     # setting up logger
@@ -24,6 +34,14 @@ def smartui_snapshot(page: Page, name: str, options={}):
         dom['url'] = page.url        
         dom['dom'] = page.evaluate("([options]) => SmartUIDOM.serialize(options)",[options])
         
+        if not options.get('sessionId'):
+            try:
+                session_id = _session_id(page.evaluate("_ => {}", GET_TEST_DETAILS))
+            except Exception:
+                session_id = ''
+            if session_id:
+                options = {**options, 'sessionId': session_id}
+
         res = post_snapshot(dom, 'lambdatest-playwright-driver', options=options)
 
         if res and res.get('data') and res['data'].get('warnings') and len(res['data']['warnings']) != 0:
@@ -58,6 +76,14 @@ async def smartui_snapshot_async(page: Page, name: str, options={}):
         dom['name'] = name
         dom['url'] = page.url
         dom['dom'] = await page.evaluate("([options]) => SmartUIDOM.serialize(options)", [options])
+
+        if not options.get('sessionId'):
+            try:
+                session_id = _session_id(await page.evaluate("_ => {}", GET_TEST_DETAILS))
+            except Exception:
+                session_id = ''
+            if session_id:
+                options = {**options, 'sessionId': session_id}
 
         res = post_snapshot(dom, 'lambdatest-playwright-driver', options=options)
 
