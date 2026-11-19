@@ -34,6 +34,7 @@ def smartui_snapshot(page: Page, name: str, options={}):
         dom['url'] = page.url        
         dom['dom'] = page.evaluate("([options]) => SmartUIDOM.serialize(options)",[options])
         
+        options = options or {}
         if not options.get('sessionId'):
             try:
                 session_id = _session_id(page.evaluate("_ => {}", GET_TEST_DETAILS))
@@ -77,6 +78,7 @@ async def smartui_snapshot_async(page: Page, name: str, options={}):
         dom['url'] = page.url
         dom['dom'] = await page.evaluate("([options]) => SmartUIDOM.serialize(options)", [options])
 
+        options = options or {}
         if not options.get('sessionId'):
             try:
                 session_id = _session_id(await page.evaluate("_ => {}", GET_TEST_DETAILS))
